@@ -1,0 +1,6 @@
+@MethodsReturnNonnullByDefault
+@FieldsAreNonnullByDefault
+package survivalblock.atmosphere.sandbox.client;
+
+import com.mojang.logging.annotations.FieldsAreNonnullByDefault;
+import com.mojang.logging.annotations.MethodsReturnNonnullByDefault;

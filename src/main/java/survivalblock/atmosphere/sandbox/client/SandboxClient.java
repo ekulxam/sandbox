@@ -9,13 +9,27 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.Util;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.commands.Commands;
+import net.minecraft.core.LayeredRegistryAccess;
+import net.minecraft.core.Registry;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.RegistryLayer;
+import net.minecraft.server.ReloadableServerResources;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.resources.CloseableResourceManager;
+import net.minecraft.server.packs.resources.MultiPackResourceManager;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
 import org.joml.Matrix4f;
+import survivalblock.atmosphere.sandbox.client.mock.FakeClientWorld;
+
+import java.util.concurrent.CompletableFuture;
 
 public class SandboxClient implements ClientModInitializer {
     public static int selectedOnWheel = 1;
@@ -78,6 +92,26 @@ public class SandboxClient implements ClientModInitializer {
             angle = nextAngle;
             nextInside = inside;
         }
+    }
+
+    public static CompletableFuture<Level> createFakeWorld() {
+        Minecraft client = Minecraft.getInstance();
+        LayeredRegistryAccess<RegistryLayer> registries = RegistryLayer.createRegistryAccess();
+        CloseableResourceManager closeableResourceManager = new MultiPackResourceManager(PackType.SERVER_DATA, client.getResourcePackRepository().openAllSelected());
+        return ReloadableServerResources.loadResources(
+                        closeableResourceManager,
+                        registries,
+                        FakeClientWorld.DEFAULT_ENABLED_FEATURES,
+                        Commands.CommandSelection.INTEGRATED,
+                        2,
+                        Util.backgroundExecutor(),
+                        client
+                )
+                .whenComplete((reloadableServerResources, throwable) -> {
+                    if (throwable != null) {
+                        closeableResourceManager.close();
+                    }
+                }).thenApply(reloadableServerResources -> new FakeClientWorld(registries.compositeAccess()));
     }
 
     public record Coordinate(int x, int y) {

@@ -21,10 +21,7 @@
 		],
         "client": [
           "survivalblock.atmosphere.sandbox.client.SandboxClient"
-        ],
-		"fabric-datagen": [
-          "survivalblock.atmosphere.sandbox.client.datagen.SandboxDataGenerator"
-		]
+        ]
 	},
 	"mixins": [
 		"sandbox.mixins.json"
@@ -32,7 +29,6 @@
 	"depends": {
 		"fabricloader": "*",
         "minecraft": "*",
-		"java": ">=17",
-		"fabric-api": "*"
+		"java": ">=17"
 	}
 }

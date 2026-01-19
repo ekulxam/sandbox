@@ -43,7 +43,7 @@ dependencies {
     modImplementation("net.fabricmc:fabric-loader:${project.property("loader_version")}")
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("deps.fabric_api")}")
+    //modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("deps.fabric_api")}")
 }
 
 stonecutter {
