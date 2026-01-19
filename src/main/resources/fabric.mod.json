@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "sandbox",
+	"version": "${version}",
+	"name": "Sandbox",
+	"description": "Minecraft modding playground",
+	"authors": [
+		"Survivalblock"
+	],
+	"contact": {
+		"homepage": "https://github.com/ekulxam/sandbox",
+		"sources": "https://github.com/ekulxam/sandbox",
+        "issues": "https://github.com/ekulxam/sandbox/issues"
+	},
+	"license": "ARR",
+	"icon": "assets/sandbox/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "survivalblock.atmosphere.sandbox.Sandbox"
+		],
+		"fabric-datagen": [
+          "survivalblock.atmosphere.sandbox.datagen.SandboxDataGenerator"
+		]
+	},
+	"mixins": [
+		"sandbox.mixins.json"
+	],
+	"depends": {
+		"fabricloader": "*",
+        "minecraft": "*",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
