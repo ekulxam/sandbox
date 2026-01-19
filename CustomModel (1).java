@@ -69,12 +69,12 @@ public class CustomModel extends EntityModel<Entity> {
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, 10.0F, -8.0F, 12.0F, 12.0F, 16.0F, new Dilation(0.0F))
-                .uv(16, 40).cuboid(-6.0F, 8.0F, -6.0F, 12.0F, 2.0F, 12.0F, new Dilation(0.0F))
-                .uv(16, 40).cuboid(-6.0F, 22.0F, -6.0F, 12.0F, 2.0F, 12.0F, new Dilation(0.0F))
-                .uv(0, 28).cuboid(-8.0F, 10.0F, -6.0F, 2.0F, 12.0F, 12.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData body = modelPartData.addChild("body", ModelPartBuilder.create().uv(0, 0).cuboid(-6.0F, -6.0F, -8.0F, 12.0F, 12.0F, 16.0F, new Dilation(0.0F))
+                .uv(16, 40).cuboid(-6.0F, -8.0F, -6.0F, 12.0F, 2.0F, 12.0F, new Dilation(0.0F))
+                .uv(16, 40).cuboid(-6.0F, 6.0F, -6.0F, 12.0F, 2.0F, 12.0F, new Dilation(0.0F))
+                .uv(0, 28).cuboid(-8.0F, -6.0F, -6.0F, 2.0F, 12.0F, 12.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 16.0F, 0.0F));
 
-        ModelPartData body_flipped = body.addChild("body_flipped", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData body_flipped = body.addChild("body_flipped", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 8.0F, 0.0F));
 
         ModelPartData body_sub_1 = body_flipped.addChild("body_sub_1", ModelPartBuilder.create().uv(0, 28).mirrored().cuboid(6.0F, -14.0F, -6.0F, 2.0F, 12.0F, 12.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
 
