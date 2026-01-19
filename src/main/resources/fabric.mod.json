@@ -17,10 +17,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-          "survivalblock.atmosphere.sandbox.Sandbox"
+          "survivalblock.atmosphere.sandbox.common.Sandbox"
 		],
+        "client": [
+          "survivalblock.atmosphere.sandbox.client.SandboxClient"
+        ],
 		"fabric-datagen": [
-          "survivalblock.atmosphere.sandbox.datagen.SandboxDataGenerator"
+          "survivalblock.atmosphere.sandbox.client.datagen.SandboxDataGenerator"
 		]
 	},
 	"mixins": [

@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox;
+package survivalblock.atmosphere.sandbox.common;
 
 import net.fabricmc.api.ModInitializer;
 
