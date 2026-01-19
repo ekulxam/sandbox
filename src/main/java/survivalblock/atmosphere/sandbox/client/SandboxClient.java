@@ -1,5 +1,6 @@
 package survivalblock.atmosphere.sandbox.client;
 
+import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.BufferUploader;
@@ -29,7 +30,7 @@ public class SandboxClient implements ClientModInitializer {
         }
         Coordinate center = new Coordinate(drawContext.guiWidth() / 2, drawContext.guiHeight() / 2);
         int radius = (int) (Math.min(center.x, center.y) * 0.5);
-        Coordinate previous = center.add(0, radius);
+        Coordinate previous = center.add(0, -radius);
         PoseStack matrixStack = drawContext.pose();
         //drawContext.fill(center.x - 1, center.y - 1, center.x + 1, center.y + 1, 0xFF0000FF);
         //drawContext.fill(previous.x - 1, previous.y - 1, previous.x + 1, previous.y + 1, 0xFFFF0000);
@@ -45,10 +46,14 @@ public class SandboxClient implements ClientModInitializer {
 
             //drawContext.fill(updated.x - 1, updated.y - 1, updated.x + 1, updated.y + 1, Masonry.ColorHelper.lerp((float) i / max, 0xFFFF0000, 0xFF00FF00));
 
-            BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.TRIANGLE_STRIP, DefaultVertexFormat.POSITION_COLOR);
+            BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
 
             Matrix4f matrix4f = matrixStack.last().pose();
             RenderSystem.disableCull();
+            RenderSystem.enableBlend();
+            RenderSystem.blendFuncSeparate(
+                    GlStateManager.SourceFactor.ONE_MINUS_DST_COLOR, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO
+            );
             bufferBuilder.addVertex(matrix4f, previous.x, previous.y, 5).setColor(0x88484A48);
             bufferBuilder.addVertex(matrix4f, updated.x, updated.y, 5).setColor(0x88484A48);
             bufferBuilder.addVertex(matrix4f, newCenter.x, newCenter.y, 5).setColor(0x88484A48);
