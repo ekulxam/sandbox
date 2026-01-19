@@ -18,6 +18,9 @@ import net.minecraft.util.Mth;
 import org.joml.Matrix4f;
 
 public class SandboxClient implements ClientModInitializer {
+    public static int selectedOnWheel = 1;
+    public static int wheelMax = 7;
+
     @Override
     public void onInitializeClient() {
     }
@@ -35,18 +38,17 @@ public class SandboxClient implements ClientModInitializer {
         PoseStack matrixStack = drawContext.pose();
 
         float angle = -Mth.HALF_PI;
-        int max = 7;
         float prevAngle = 0;
         int color;
         boolean selected;
 
-        for (int i = 0; i < max + 1; i++) {
-            float nextAngle = (360F / max) * (i + 1) * Mth.DEG_TO_RAD - Mth.HALF_PI;
+        for (int i = 0; i < wheelMax + 1; i++) {
+            float nextAngle = (360F / wheelMax) * (i + 1) * Mth.DEG_TO_RAD - Mth.HALF_PI;
             Coordinate outside = center.add((int) (Mth.cos(angle) * radius), (int) (Mth.sin(angle) * radius));
             Coordinate inside = center.add((int) (Mth.cos(angle) * radius * 0.35), (int) (Mth.sin(angle) * radius * 0.35));
 
             if (i > 0) {
-                selected = (Minecraft.getInstance().level.getGameTime() / 10) % max == i - 1;
+                selected = selectedOnWheel == i - 1;
                 color = selected ? 0x889f9f9f : 0x88484A48;
                 RenderSystem.disableCull();
                 RenderSystem.enableBlend();
