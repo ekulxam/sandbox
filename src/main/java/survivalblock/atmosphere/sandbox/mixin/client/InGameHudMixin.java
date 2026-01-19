@@ -26,9 +26,6 @@ public class InGameHudMixin {
     private void eee(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
         if (Screen.hasAltDown() && this.minecraft.screen == null) {
             SandboxClient.rendering(context, tickCounter);
-            ci.cancel();
-            RenderSystem.defaultBlendFunc();
-            RenderSystem.disableBlend();
         }
     }
 }
