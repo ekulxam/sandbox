@@ -133,7 +133,7 @@ public class SandboxClient implements ClientModInitializer {
 
     public static void maybeResetScreenPlayer() {
         if (sandboxPlayer == null) {
-            tryingToInit = true;
+            tryingToInit = false;
         }
     }
 
