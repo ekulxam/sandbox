@@ -14,26 +14,36 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.LayeredRegistryAccess;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.RegistryLayer;
+import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.CloseableResourceManager;
 import net.minecraft.server.packs.resources.MultiPackResourceManager;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import survivalblock.atmosphere.sandbox.client.mock.FakeClientWorld;
+import survivalblock.atmosphere.sandbox.client.mock.ScreenPlayer;
+import survivalblock.atmosphere.sandbox.mixin.WorldLoaderAccessor;
 
 import java.util.concurrent.CompletableFuture;
 
 public class SandboxClient implements ClientModInitializer {
     public static int selectedOnWheel = 1;
     public static int wheelMax = 7;
+
+    private static ScreenPlayer sandboxPlayer = null;
+    private static boolean tryingToInit = false;
 
     @Override
     public void onInitializeClient() {
@@ -94,13 +104,19 @@ public class SandboxClient implements ClientModInitializer {
         }
     }
 
-    public static CompletableFuture<Level> createFakeWorld() {
+    public static CompletableFuture<ClientLevel> createFakeWorld() {
         Minecraft client = Minecraft.getInstance();
-        LayeredRegistryAccess<RegistryLayer> registries = RegistryLayer.createRegistryAccess();
+        LayeredRegistryAccess<RegistryLayer> layeredRegistryAccess = RegistryLayer.createRegistryAccess();
         CloseableResourceManager closeableResourceManager = new MultiPackResourceManager(PackType.SERVER_DATA, client.getResourcePackRepository().openAllSelected());
+        LayeredRegistryAccess<RegistryLayer> layeredRegistryAccess2 = WorldLoaderAccessor.sandbox$invokeLoadAndReplaceLayer(
+                closeableResourceManager, layeredRegistryAccess, RegistryLayer.WORLDGEN, RegistryDataLoader.WORLDGEN_REGISTRIES
+        );
+        RegistryAccess.Frozen frozen = layeredRegistryAccess2.getAccessForLoading(RegistryLayer.DIMENSIONS);
+        RegistryAccess.Frozen frozen2 = RegistryDataLoader.load(closeableResourceManager, frozen, RegistryDataLoader.DIMENSION_REGISTRIES);
+
         return ReloadableServerResources.loadResources(
                         closeableResourceManager,
-                        registries,
+                        layeredRegistryAccess2,
                         FakeClientWorld.DEFAULT_ENABLED_FEATURES,
                         Commands.CommandSelection.INTEGRATED,
                         2,
@@ -111,7 +127,23 @@ public class SandboxClient implements ClientModInitializer {
                     if (throwable != null) {
                         closeableResourceManager.close();
                     }
-                }).thenApply(reloadableServerResources -> new FakeClientWorld(registries.compositeAccess()));
+                }).thenApply(reloadableServerResources -> new FakeClientWorld(layeredRegistryAccess2.compositeAccess()));
+    }
+
+    @Nullable
+    public static ScreenPlayer getSandboxPlayer() {
+        if (!tryingToInit) {
+            tryingToInit = true;
+            SandboxClient.createFakeWorld().whenComplete(
+                    (level, throwable) ->
+                            sandboxPlayer = new ScreenPlayer(level, Minecraft.getInstance().getGameProfile())
+            );
+        }
+        //noinspection ConstantValue
+        if (sandboxPlayer != null) {
+            tryingToInit = false;
+        }
+        return sandboxPlayer;
     }
 
     public record Coordinate(int x, int y) {
