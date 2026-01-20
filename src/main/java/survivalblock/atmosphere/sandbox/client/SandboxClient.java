@@ -34,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import survivalblock.atmosphere.sandbox.client.mock.FakeClientWorld;
 import survivalblock.atmosphere.sandbox.client.mock.ScreenPlayer;
+import survivalblock.atmosphere.sandbox.common.Sandbox;
 import survivalblock.atmosphere.sandbox.mixin.WorldLoaderAccessor;
 
 import java.util.concurrent.CompletableFuture;
@@ -130,18 +131,25 @@ public class SandboxClient implements ClientModInitializer {
                 }).thenApply(reloadableServerResources -> new FakeClientWorld(layeredRegistryAccess2.compositeAccess()));
     }
 
+    public static void maybeResetScreenPlayer() {
+        if (sandboxPlayer == null) {
+            tryingToInit = true;
+        }
+    }
+
     @Nullable
     public static ScreenPlayer getSandboxPlayer() {
         if (!tryingToInit) {
             tryingToInit = true;
             SandboxClient.createFakeWorld().whenComplete(
-                    (level, throwable) ->
-                            sandboxPlayer = new ScreenPlayer(level, Minecraft.getInstance().getGameProfile())
+                    (level, throwable) -> {
+                        if (throwable != null) {
+                            Sandbox.LOGGER.error("An error occurred when creating the ScreenPlayer!", throwable);
+                        } else {
+                            sandboxPlayer = new ScreenPlayer(level, Minecraft.getInstance().getGameProfile());
+                        }
+                    }
             );
-        }
-        //noinspection ConstantValue
-        if (sandboxPlayer != null) {
-            tryingToInit = false;
         }
         return sandboxPlayer;
     }

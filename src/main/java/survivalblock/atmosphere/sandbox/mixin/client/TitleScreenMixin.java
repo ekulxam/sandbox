@@ -20,6 +20,11 @@ public abstract class TitleScreenMixin extends Screen {
         super(component);
     }
 
+    @Inject(method = "init", at = @At("RETURN"))
+    private void a(CallbackInfo ci) {
+        SandboxClient.maybeResetScreenPlayer();
+    }
+
     @Inject(method = "render", at = @At("RETURN"))
     private void renderPlayer(GuiGraphics guiGraphics, int i, int j, float f, CallbackInfo ci) {
         EntityRenderDispatcher dispatcher = this.minecraft.getEntityRenderDispatcher();
