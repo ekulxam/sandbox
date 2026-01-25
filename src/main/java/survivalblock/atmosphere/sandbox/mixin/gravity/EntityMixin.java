@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.mixin;
+package survivalblock.atmosphere.sandbox.mixin.gravity;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;

@@ -1,6 +1,5 @@
-package survivalblock.atmosphere.sandbox.mixin.client;
+package survivalblock.atmosphere.sandbox.mixin.playeroutofworld.client;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

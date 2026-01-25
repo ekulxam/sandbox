@@ -57,7 +57,7 @@ fletchingTable {
     mixins.create("main") {
         // Default matches the default value in the annotation
         mixin("default", "${project.property("archives_base_name")}.mixins.json") {
-            env("CLIENT", "survivalblock.atmosphere.sandbox.mixin.client")
+            env("CLIENT", "survivalblock.atmosphere.sandbox.mixin.playerinworld.client")
         }
     }
     mixins.all {

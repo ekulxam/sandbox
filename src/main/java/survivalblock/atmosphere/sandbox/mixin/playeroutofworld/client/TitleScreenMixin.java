@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.mixin.client;
+package survivalblock.atmosphere.sandbox.mixin.playeroutofworld.client;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;

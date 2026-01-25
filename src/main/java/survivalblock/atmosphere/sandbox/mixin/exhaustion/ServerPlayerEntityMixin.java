@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.mixin;
+package survivalblock.atmosphere.sandbox.mixin.exhaustion;
 
 import net.minecraft.server.level.ServerPlayer;
 

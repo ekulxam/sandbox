@@ -3,11 +3,11 @@
   "package": "survivalblock.atmosphere.sandbox.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "WorldLoaderAccessor"
+    "playeroutofworld.WorldLoaderAccessor"
   ],
   "client": [
-    "client.ClientWorldMixin",
-    "client.TitleScreenMixin"
+    "playeroutofworld.client.ClientWorldMixin",
+    "playeroutofworld.client.TitleScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

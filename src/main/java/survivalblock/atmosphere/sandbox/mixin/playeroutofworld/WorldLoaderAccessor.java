@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.mixin;
+package survivalblock.atmosphere.sandbox.mixin.playeroutofworld;
 
 import net.minecraft.core.LayeredRegistryAccess;
 import net.minecraft.resources.RegistryDataLoader;

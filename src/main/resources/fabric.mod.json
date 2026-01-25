@@ -21,6 +21,9 @@
 		],
         "client": [
           "survivalblock.atmosphere.sandbox.client.SandboxClient"
+        ],
+        "fabric-datagen": [
+          "survivalblock.atmosphere.sandbox.client.datagen.SandboxDataGenerator"
         ]
 	},
 	"mixins": [

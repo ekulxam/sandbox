@@ -18,24 +18,20 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.LayeredRegistryAccess;
-import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.RegistryDataLoader;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.RegistryLayer;
-import net.minecraft.server.ReloadableServerRegistries;
 import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.CloseableResourceManager;
 import net.minecraft.server.packs.resources.MultiPackResourceManager;
 import net.minecraft.util.Mth;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import survivalblock.atmosphere.sandbox.client.mock.FakeClientWorld;
 import survivalblock.atmosphere.sandbox.client.mock.ScreenPlayer;
 import survivalblock.atmosphere.sandbox.common.Sandbox;
-import survivalblock.atmosphere.sandbox.mixin.WorldLoaderAccessor;
+import survivalblock.atmosphere.sandbox.mixin.playeroutofworld.WorldLoaderAccessor;
 
 import java.util.concurrent.CompletableFuture;
 
