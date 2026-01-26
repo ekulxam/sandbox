@@ -21,4 +21,8 @@ public class SandboxModelGenerator extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerators itemModelGenerators) {
         itemModelGenerators.generateFlatItem(SandboxItems.COMPONENT_UPDATE_TEST, ModelTemplates.FLAT_HANDHELD_ITEM);
     }
+
+    public void yeah(Boolean bool) {
+
+    }
 }
