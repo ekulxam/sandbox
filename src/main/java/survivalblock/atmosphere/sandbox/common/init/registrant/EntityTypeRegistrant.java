@@ -8,6 +8,7 @@ import net.minecraft.world.entity.EntityType;
 
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public class EntityTypeRegistrant extends Registrant<EntityType<?>> {
     protected EntityTypeRegistrant(String modId, Registry<EntityType<?>> registry) {
         super(modId, registry);

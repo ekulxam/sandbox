@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 public class DelayedRegistrant<T> extends Registrant<T> {
-
     protected final Map<String, T> delayed = new HashMap<>();
 
     public DelayedRegistrant(String modId, Registry<T> registry) {
@@ -26,7 +25,13 @@ public class DelayedRegistrant<T> extends Registrant<T> {
         return obj;
     }
 
-    public void registerAll() {
+    protected void registerAll() {
         this.delayed.forEach(super::register);
+    }
+
+    @SuppressWarnings("unused")
+    public void consumeAll() {
+        this.registerAll();
+        this.delayed.clear();
     }
 }
