@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.common.init.registrant;
+package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -8,20 +8,20 @@ import net.minecraft.world.item.CreativeModeTab;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public class ItemGroupRegistrant extends Registrant<CreativeModeTab> {
-    protected ItemGroupRegistrant(String modId, Registry<CreativeModeTab> registry) {
+public class DelayedItemGroupRegistrant extends DelayedRegistrant<CreativeModeTab> {
+    protected DelayedItemGroupRegistrant(String modId, Registry<CreativeModeTab> registry) {
         super(modId, registry);
     }
 
-    protected ItemGroupRegistrant(Function<String, ResourceLocation> idFunction, Registry<CreativeModeTab> registry) {
+    protected DelayedItemGroupRegistrant(Function<String, ResourceLocation> idFunction, Registry<CreativeModeTab> registry) {
         super(idFunction, registry);
     }
 
-    public ItemGroupRegistrant(String modId) {
+    public DelayedItemGroupRegistrant(String modId) {
         this(modId, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
 
-    public ItemGroupRegistrant(Function<String, ResourceLocation> idFunction) {
+    public DelayedItemGroupRegistrant(Function<String, ResourceLocation> idFunction) {
         this(idFunction, BuiltInRegistries.CREATIVE_MODE_TAB);
     }
 

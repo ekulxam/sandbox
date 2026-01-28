@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.common.init.registrant;
+package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -9,20 +9,20 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public class AttributeRegistrant extends Registrant<Attribute> {
-    protected AttributeRegistrant(String modId, Registry<Attribute> registry) {
+public class DelayedAttributeRegistrant extends DelayedRegistrant<Attribute> {
+    protected DelayedAttributeRegistrant(String modId, Registry<Attribute> registry) {
         super(modId, registry);
     }
 
-    protected AttributeRegistrant(Function<String, ResourceLocation> idFunction, Registry<Attribute> registry) {
+    protected DelayedAttributeRegistrant(Function<String, ResourceLocation> idFunction, Registry<Attribute> registry) {
         super(idFunction, registry);
     }
 
-    public AttributeRegistrant(String modId) {
+    public DelayedAttributeRegistrant(String modId) {
         this(modId, BuiltInRegistries.ATTRIBUTE);
     }
 
-    public AttributeRegistrant(Function<String, ResourceLocation> idFunction) {
+    public DelayedAttributeRegistrant(Function<String, ResourceLocation> idFunction) {
         this(idFunction, BuiltInRegistries.ATTRIBUTE);
     }
 

@@ -6,7 +6,6 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.function.Function;
 
 public class Registrant<T> {
-
     protected final Function<String, ResourceLocation> idFunction;
     protected final Registry<T> registry;
 
@@ -19,7 +18,7 @@ public class Registrant<T> {
         this.registry = registry;
     }
 
-    protected <U extends T> U register(String name, U obj) {
+    public <U extends T> U register(String name, U obj) {
         return Registry.register(this.registry, this.idFunction.apply(name), obj);
     }
 }

@@ -1,7 +1,6 @@
 package survivalblock.atmosphere.sandbox.common;
 
 import net.fabricmc.api.ModInitializer;
-
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

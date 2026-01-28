@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.common.init.registrant;
+package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityType;
 import net.minecraft.core.Registry;
@@ -10,20 +10,20 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public class BlockEntityTypeRegistrant extends Registrant<BlockEntityType<?>> {
-    protected BlockEntityTypeRegistrant(String modId, Registry<BlockEntityType<?>> registry) {
+public class DelayedBlockEntityTypeRegistrant extends DelayedRegistrant<BlockEntityType<?>> {
+    protected DelayedBlockEntityTypeRegistrant(String modId, Registry<BlockEntityType<?>> registry) {
         super(modId, registry);
     }
 
-    protected BlockEntityTypeRegistrant(Function<String, ResourceLocation> idFunction, Registry<BlockEntityType<?>> registry) {
+    protected DelayedBlockEntityTypeRegistrant(Function<String, ResourceLocation> idFunction, Registry<BlockEntityType<?>> registry) {
         super(idFunction, registry);
     }
 
-    public BlockEntityTypeRegistrant(String modId) {
+    public DelayedBlockEntityTypeRegistrant(String modId) {
         this(modId, BuiltInRegistries.BLOCK_ENTITY_TYPE);
     }
 
-    public BlockEntityTypeRegistrant(Function<String, ResourceLocation> idFunction) {
+    public DelayedBlockEntityTypeRegistrant(Function<String, ResourceLocation> idFunction) {
         this(idFunction, BuiltInRegistries.BLOCK_ENTITY_TYPE);
     }
 

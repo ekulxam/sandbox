@@ -3,7 +3,9 @@ package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 import java.util.function.Function;
 
@@ -25,8 +27,20 @@ public class DelayedItemRegistrant extends DelayedRegistrant<Item> {
         this(idFunction, BuiltInRegistries.ITEM);
     }
 
-    public <T extends Item, S extends Item.Settings> Item register(String name, Function<S, T> itemFunction, S settings) {
-        Item item = itemFunction.apply(settings);
+    public <T extends Item, S extends Item.Properties> T register(String name, Function<S, T> itemFunction, S settings) {
+        T item = itemFunction.apply(settings);
         return this.register(name, item);
+    }
+
+    public BlockItem register(Block block) {
+        return register(block, new Item.Properties());
+    }
+
+    public <S extends Item.Properties> BlockItem register(Block block, S settings) {
+        return register(block, settings1 -> new BlockItem(block, settings1), settings);
+    }
+
+    public <T extends Item, S extends Item.Properties> T register(Block block, Function<S, T> itemFunction, S settings) {
+        return this.register(block.builtInRegistryHolder().getRegisteredName(), itemFunction, settings);
     }
 }

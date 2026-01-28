@@ -20,13 +20,17 @@ public class DelayedRegistrant<T> extends Registrant<T> {
     }
 
     @Override
-    protected <U extends T> U register(String name, U obj) {
+    public <U extends T> U register(String name, U obj) {
         this.delayed.put(name, obj);
         return obj;
     }
 
+    protected <U extends T> void actuallyRegister(String name, U obj) {
+        super.register(name, obj);
+    }
+
     protected void registerAll() {
-        this.delayed.forEach(super::register);
+        this.delayed.forEach(this::actuallyRegister);
     }
 
     @SuppressWarnings("unused")

@@ -1,4 +1,4 @@
-package survivalblock.atmosphere.sandbox.common.init.registrant;
+package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -8,20 +8,20 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.function.Function;
 
 @SuppressWarnings("unused")
-public class DataComponentTypeRegistrant extends Registrant<DataComponentType<?>> {
-    protected DataComponentTypeRegistrant(String modId, Registry<DataComponentType<?>> registry) {
+public class DelayedDataComponentTypeRegistrant extends DelayedRegistrant<DataComponentType<?>> {
+    protected DelayedDataComponentTypeRegistrant(String modId, Registry<DataComponentType<?>> registry) {
         super(modId, registry);
     }
 
-    protected DataComponentTypeRegistrant(Function<String, ResourceLocation> idFunction, Registry<DataComponentType<?>> registry) {
+    protected DelayedDataComponentTypeRegistrant(Function<String, ResourceLocation> idFunction, Registry<DataComponentType<?>> registry) {
         super(idFunction, registry);
     }
 
-    public DataComponentTypeRegistrant(String modId) {
+    public DelayedDataComponentTypeRegistrant(String modId) {
         this(modId, BuiltInRegistries.DATA_COMPONENT_TYPE);
     }
 
-    public DataComponentTypeRegistrant(Function<String, ResourceLocation> idFunction) {
+    public DelayedDataComponentTypeRegistrant(Function<String, ResourceLocation> idFunction) {
         this(idFunction, BuiltInRegistries.DATA_COMPONENT_TYPE);
     }
 
