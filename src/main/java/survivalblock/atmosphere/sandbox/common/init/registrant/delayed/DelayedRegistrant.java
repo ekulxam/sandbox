@@ -1,5 +1,6 @@
 package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 
+import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import survivalblock.atmosphere.sandbox.common.init.registrant.Registrant;

@@ -27,11 +27,11 @@ public class DelayedSoundEventRegistrant extends DelayedRegistrant<SoundEvent> {
     }
 
     public SoundEvent register(String name) {
-        return this.registerReference(name).value();
+        return this.register(name, (Function<ResourceLocation, SoundEvent>) SoundEvent::createVariableRangeEvent);
     }
 
     public SoundEvent register(String name, Function<ResourceLocation, SoundEvent> soundEventFunction) {
-        return this.registerReference(name, soundEventFunction).value();
+        return this.register(name, soundEventFunction.apply(this.idFunction.apply(name)));
     }
 
     public Holder.Reference<SoundEvent> registerReference(String name) {
