@@ -2,6 +2,7 @@ package survivalblock.atmosphere.sandbox.common.init.registrant;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -27,7 +28,7 @@ public class EntityTypeRegistrant extends Registrant<EntityType<?>> {
     }
 
     public <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
-        return this.register(name, builder.build());
+        return this.register(name, builder.build(/*? >=1.21.2 {*/ResourceKey.create(this.registry.key(), this.idFunction.apply(name))/*?}*/));
     }
 
     public <T extends Entity> EntityType<T> register(String name, EntityType<T> entityType) {

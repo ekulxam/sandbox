@@ -1,9 +1,8 @@
 package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 
-import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import survivalblock.atmosphere.sandbox.common.init.registrant.Registrant;
+import survivalblock.atmosphere.atmospheric_api.not_mixin.registrant.Registrant;
 
 import java.util.HashMap;
 import java.util.Map;

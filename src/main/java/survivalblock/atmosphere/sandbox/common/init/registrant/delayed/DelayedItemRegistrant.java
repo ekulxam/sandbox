@@ -2,6 +2,7 @@ package survivalblock.atmosphere.sandbox.common.init.registrant.delayed;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -28,7 +29,7 @@ public class DelayedItemRegistrant extends DelayedRegistrant<Item> {
     }
 
     public <T extends Item, S extends Item.Properties> T register(String name, Function<S, T> itemFunction, S settings) {
-        T item = itemFunction.apply(settings);
+        T item = itemFunction.apply(/*? >=1.21.2 {*/(S)/*?}*/ settings /*? >=1.21.2 {*/.setId(ResourceKey.create(this.registry.key(), this.idFunction.apply(name))) /*?}*/);
         return this.register(name, item);
     }
 
