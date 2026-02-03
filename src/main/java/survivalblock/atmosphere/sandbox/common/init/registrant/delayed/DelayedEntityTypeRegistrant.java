@@ -28,7 +28,7 @@ public class DelayedEntityTypeRegistrant extends DelayedRegistrant<EntityType<?>
     }
 
     public <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
-        return this.register(name, builder.build(/*? >=1.21.2 {*/ResourceKey.create(this.registry.key(), this.idFunction.apply(name))/*?}*/));
+        return this.register(name, builder.build(/*? >=1.21.2 {*//*ResourceKey.create(this.registry.key(), this.idFunction.apply(name))*//*?}*/));
     }
 
     public <T extends Entity> EntityType<T> register(String name, EntityType<T> entityType) {

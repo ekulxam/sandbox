@@ -29,7 +29,7 @@ public class ItemRegistrant extends Registrant<Item> {
     }
 
     public <T extends Item, S extends Item.Properties> T register(String name, Function<S, T> itemFunction, S settings) {
-        T item = itemFunction.apply(/*? >=1.21.2 {*/(S)/*?}*/ settings /*? >=1.21.2 {*/.setId(ResourceKey.create(this.registry.key(), this.idFunction.apply(name))) /*?}*/);
+        T item = itemFunction.apply(/*? >=1.21.2 {*//*(S)*//*?}*/ settings /*? >=1.21.2 {*//*.setId(ResourceKey.create(this.registry.key(), this.idFunction.apply(name))) *//*?}*/);
         return this.register(name, item);
     }
 
@@ -43,5 +43,10 @@ public class ItemRegistrant extends Registrant<Item> {
 
     public <T extends Item, S extends Item.Properties> T register(Block block, Function<S, T> itemFunction, S settings) {
         return this.register(block.builtInRegistryHolder().key().location().getPath(), itemFunction, settings);
+    }
+
+    @Override
+    public String getTranslationKey(Item obj) {
+        return obj.getDescriptionId();
     }
 }
