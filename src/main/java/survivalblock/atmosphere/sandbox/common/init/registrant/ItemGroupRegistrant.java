@@ -2,6 +2,7 @@ package survivalblock.atmosphere.sandbox.common.init.registrant;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 
@@ -27,5 +28,13 @@ public class ItemGroupRegistrant extends Registrant<CreativeModeTab> {
 
     public CreativeModeTab register(String name, CreativeModeTab.Builder builder) {
         return this.register(name, builder.build());
+    }
+
+    @Override
+    public String getTranslationKey(CreativeModeTab obj) {
+        if (obj.getDisplayName().getContents() instanceof TranslatableContents translatable) {
+            return translatable.getKey();
+        }
+        return "itemGroup." + this.registry.getKey(obj).getPath();
     }
 }
